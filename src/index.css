@@ -1,0 +1,221 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   Young Agripreneurs 1 Tutor — "Golden Ratio" light theme
+   (contract §16). Warm ivory base, white cards, golden amber
+   accents, olive-sage + terracotta secondaries, deep umber text.
+   Bright, warm, hopeful — no dark surfaces.
+   ============================================================ */
+
+:root {
+  --ivory: #faf6ee;
+  --ivory-deep: #f5efe1;
+  --paper: #ffffff;
+  --sand: #e8ddc4;
+  --sand-deep: #d8caa6;
+  --gold: #c9992e;
+  --gold-deep: #a07c1f;
+  --gold-tint: #f4e8c8;
+  --sage: #7d8c5c;
+  --sage-deep: #5f6e45;
+  --terra: #b4664a;
+  --terra-deep: #96503a;
+  --ink: #3a2f1d;
+  --ink-soft: #6b5d43;
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    @apply h-full;
+  }
+
+  body {
+    background-color: var(--ivory);
+    color: var(--ink-soft);
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: rgba(201, 153, 46, 0.3);
+    color: var(--ink);
+  }
+
+  /* Warm gold custom scrollbar on ivory */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(201, 153, 46, 0.45) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: rgba(201, 153, 46, 0.4);
+    border-radius: 9999px;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(201, 153, 46, 0.6);
+  }
+}
+
+@layer components {
+  /* Playfair Display headings */
+  .font-display {
+    font-family: 'Playfair Display', serif;
+  }
+
+  /* JetBrains Mono labels / meta */
+  .font-label {
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* Soft golden radial glow on ivory — place inside a `relative overflow-hidden` parent */
+  .spotlight {
+    @apply pointer-events-none absolute inset-0;
+    background:
+      radial-gradient(ellipse 60% 45% at 50% 0%, rgba(201, 153, 46, 0.12), transparent 70%),
+      radial-gradient(ellipse 80% 60% at 50% 110%, rgba(125, 140, 92, 0.07), transparent 70%);
+  }
+
+  /* Small spotlight accent behind a single element */
+  .spotlight-tight {
+    background: radial-gradient(ellipse 70% 90% at 50% 20%, rgba(201, 153, 46, 0.14), transparent 70%);
+  }
+
+  /* White card with warm sand border + soft golden shadow */
+  .card-playbill {
+    background: var(--paper);
+    border: 1px solid var(--sand);
+    border-radius: 0.75rem;
+    box-shadow:
+      0 1px 2px rgba(58, 47, 29, 0.05),
+      0 10px 30px rgba(201, 153, 46, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  /* Primary gold button — deep umber text for strong contrast; deepens on hover */
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition;
+    background: linear-gradient(180deg, #d9ab3c, var(--gold));
+    color: var(--ink);
+    border: 1px solid var(--gold-deep);
+    box-shadow: 0 4px 14px rgba(201, 153, 46, 0.28);
+  }
+  .btn-gold:hover:not(:disabled) {
+    background: linear-gradient(180deg, var(--gold), var(--gold-deep));
+    color: #fffdf7;
+    box-shadow: 0 6px 20px rgba(201, 153, 46, 0.38);
+  }
+  .btn-gold:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+  .btn-gold:focus-visible {
+    outline: 2px solid var(--gold-deep);
+    outline-offset: 2px;
+  }
+
+  /* Secondary ghost button (gold outline on light) */
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition;
+    color: var(--gold-deep);
+    border: 1px solid rgba(201, 153, 46, 0.45);
+    background: rgba(201, 153, 46, 0.07);
+  }
+  .btn-ghost:hover:not(:disabled) {
+    background: rgba(201, 153, 46, 0.15);
+    border-color: rgba(160, 124, 31, 0.7);
+  }
+  .btn-ghost:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+  .btn-ghost:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+
+  /* Themed text input — white on ivory */
+  .input-stage {
+    @apply w-full rounded-lg px-3 py-2 text-sm transition;
+    background-color: var(--paper);
+    color: var(--ink);
+    border: 1px solid var(--sand-deep);
+  }
+  .input-stage::placeholder {
+    color: rgba(107, 93, 67, 0.55);
+  }
+  .input-stage:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(201, 153, 46, 0.2);
+  }
+
+  /* Ticket-stub card for sessions */
+  .card-ticket {
+    background: var(--paper);
+    border: 1px solid var(--sand);
+    border-left: 3px solid var(--gold);
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(58, 47, 29, 0.06);
+  }
+
+  /* Role badge variants */
+  .badge-teacher {
+    @apply font-label inline-flex items-center rounded-full px-2 py-0.5 text-[10px];
+    background: var(--gold-tint);
+    color: var(--gold-deep);
+    border: 1px solid rgba(201, 153, 46, 0.55);
+  }
+  .badge-learner {
+    @apply font-label inline-flex items-center rounded-full px-2 py-0.5 text-[10px];
+    background: #e6ead9;
+    color: var(--sage-deep);
+    border: 1px solid rgba(125, 140, 92, 0.6);
+  }
+}
+
+/* ============================================================
+   Google Translate widget (contract §15) — keep the injected
+   UI minimal so it never breaks the layout. The widget lacks
+   Setswana (tn) / Sepedi (nso) on some builds; the AI-language
+   path covers those languages instead.
+   ============================================================ */
+
+/* The widget's own combo box lives in a visually hidden host div;
+   the app drives it programmatically from the Layout selector. */
+#google_translate_element {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Never let Google's top banner shift the app layout down. */
+.goog-te-banner-frame,
+.skiptranslate > iframe.goog-te-banner-frame {
+  display: none !important;
+  visibility: hidden !important;
+}
+body {
+  top: 0 !important;
+  position: static !important;
+}
+
+/* Keep the hover highlight tooltip unobtrusive on the light theme. */
+.goog-tooltip {
+  z-index: 60 !important;
+}
