@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+Allow: /about
+Allow: /tutors
+Allow: /login
+Disallow: /office
+Disallow: /team
+Disallow: /apply
+Disallow: /screening-test
+Disallow: /library
+Disallow: /waiting-room
+Disallow: /settings
+
+Sitemap: https://vukatv.vercel.app/sitemap.xml
