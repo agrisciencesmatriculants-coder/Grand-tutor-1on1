@@ -1,0 +1,208 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   VukaTV — Institutional light theme
+   Government register (DBE / Home Affairs SA): white base, black
+   text, neutral grey borders, one official accent (SA green).
+   Flat surfaces, square-ish corners, formal typography.
+   ============================================================ */
+
+:root {
+  --ivory: #ffffff;
+  --ivory-deep: #f5f5f4;
+  --paper: #ffffff;
+  --sand: #d4d4d4;
+  --sand-deep: #a3a3a3;
+  --gold: #007749;
+  --gold-deep: #005c39;
+  --gold-tint: #e6f2ec;
+  --sage: #2e7d32;
+  --sage-deep: #1b5e20;
+  --terra: #b91c1c;
+  --terra-deep: #991b1b;
+  --ink: #111111;
+  --ink-soft: #444444;
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    @apply h-full;
+  }
+
+  body {
+    background-color: var(--ivory);
+    color: var(--ink-soft);
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: rgba(0, 119, 73, 0.2);
+    color: var(--ink);
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 9999px;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+}
+
+@layer components {
+  /* Formal sans headings (same family, heavier weight). */
+  .font-display {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 700;
+  }
+
+  /* Monospace labels / meta */
+  .font-label {
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* Decorative glows removed — institutional pages are flat. */
+  .spotlight {
+    display: none;
+  }
+  .spotlight-tight {
+    background: none;
+  }
+
+  /* Flat white card with a single grey border */
+  .card-playbill {
+    background: var(--paper);
+    border: 1px solid var(--sand);
+    border-radius: 0.375rem;
+    box-shadow: none;
+  }
+
+  /* Primary button — solid SA green, white text, no gradients */
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-semibold transition;
+    background: var(--gold);
+    color: #ffffff;
+    border: 1px solid var(--gold-deep);
+    box-shadow: none;
+  }
+  .btn-gold:hover:not(:disabled) {
+    background: var(--gold-deep);
+    color: #ffffff;
+  }
+  .btn-gold:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+  .btn-gold:focus-visible {
+    outline: 2px solid var(--gold-deep);
+    outline-offset: 2px;
+  }
+
+  /* Secondary button — neutral outline */
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition;
+    color: var(--ink);
+    border: 1px solid var(--sand-deep);
+    background: #ffffff;
+  }
+  .btn-ghost:hover:not(:disabled) {
+    background: var(--ivory-deep);
+    border-color: var(--ink-soft);
+  }
+  .btn-ghost:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+  .btn-ghost:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+
+  /* Text input — white, grey border, green focus ring */
+  .input-stage {
+    @apply w-full rounded-md px-3 py-2 text-sm transition;
+    background-color: var(--paper);
+    color: var(--ink);
+    border: 1px solid var(--sand-deep);
+  }
+  .input-stage::placeholder {
+    color: rgba(68, 68, 68, 0.55);
+  }
+  .input-stage:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 2px rgba(0, 119, 73, 0.18);
+  }
+
+  /* List row with an accent leading rule (sessions etc.) */
+  .card-ticket {
+    background: var(--paper);
+    border: 1px solid var(--sand);
+    border-left: 3px solid var(--gold);
+    border-radius: 0.25rem;
+    box-shadow: none;
+  }
+
+  /* Role badges */
+  .badge-teacher {
+    @apply font-label inline-flex items-center rounded-full px-2 py-0.5 text-[10px];
+    background: var(--gold-tint);
+    color: var(--gold-deep);
+    border: 1px solid rgba(0, 119, 73, 0.45);
+  }
+  .badge-learner {
+    @apply font-label inline-flex items-center rounded-full px-2 py-0.5 text-[10px];
+    background: var(--ivory-deep);
+    color: var(--ink-soft);
+    border: 1px solid var(--sand);
+  }
+}
+
+/* ============================================================
+   Google Translate widget (contract §15) — keep the injected
+   UI minimal so it never breaks the layout. The widget lacks
+   Setswana (tn) / Sepedi (nso) on some builds; the AI-language
+   path covers those languages instead.
+   ============================================================ */
+
+#google_translate_element {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.goog-te-banner-frame,
+.skiptranslate > iframe.goog-te-banner-frame {
+  display: none !important;
+  visibility: hidden !important;
+}
+body {
+  top: 0 !important;
+  position: static !important;
+}
+
+.goog-tooltip {
+  z-index: 60 !important;
+}
